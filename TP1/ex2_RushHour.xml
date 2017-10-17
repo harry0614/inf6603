@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+
+int board[6][6];
+typedef struct {
+    int direction;
+    int x;
+    int y;
+    int length;
+}Vehicle;
+
+int nbV =13;
+Vehicle car[13] = {
+{0,0,0,2},
+{0,0,2,2},
+{1,0,4,2},
+{1,1,2,2},
+{1,1,5,3},
+{1,2,1,2},
+{0,2,3,2},
+{1,3,0,3},
+{0,3,3,2},
+{1,4,3,2},
+{0,4,4,2},
+{0,5,1,2},
+{0,5,4,2}};
+
+
+bool is_move_autorized(int v, int dir, int step)
+{
+    bool tmp = true;
+    int i;
+    if ((car[v].direction == 1 &amp;&amp; (dir == 1 || dir == 3)) ||
+        (car[v].direction == 0 &amp;&amp; (dir == 0 || dir == 2)) )
+    {
+        for (i = 1; i &lt;= step; i++)
+        {
+            if (dir == 0)
+            {
+                if (car[v].y - i &lt; 0)
+                    tmp = false;
+                else if (board[car[v].x][car[v].y - i] == 1)
+                    tmp = false;
+            }
+            if (dir == 2)
+            {
+                if (car[v].y + i + (car[v].length-1) &gt; 5)
+                    tmp = false;
+                else if (board[car[v].x][car[v].y + i + (car[v].length-1)] == 1)
+                    tmp = false;
+            }
+            if (dir == 1)
+            {
+                if (car[v].x - i &lt; 0)
+                    tmp = false;
+                else if (board[car[v].x - i][car[v].y] == 1)
+                    tmp = false;
+            }
+            if (dir == 3)
+            {
+                if (car[v].x + i + (car[v].length-1) &gt; 5)
+                    tmp = false;
+                else if (board[car[v].x + i + (car[v].length-1)][car[v].y] == 1)
+                    tmp = false;
+            }
+        }
+    }
+    else
+        tmp = false;
+    
+    return tmp;
+}
+
+void move (int v, int dir, int step)
+{
+
+    int i;
+    for (i = 1; i &lt;= step; i++)
+    {
+        if (dir == 0)
+        {
+            board[car[v].x][car[v].y - i] = 1;
+            board[car[v].x][car[v].y + car[v].length - i] = 0;
+        }
+        if (dir == 2)
+        {
+            board[car[v].x][car[v].y  + i + (car[v].length -1)] = 1;
+            board[car[v].x][car[v].y  + (i - 1)] = 0;
+        }
+        if (dir == 1)
+        {
+            board[car[v].x - i][car[v].y] = 1;
+            board[car[v].x + car[v].length - i][car[v].y] = 0;
+        }
+        if (dir == 3)
+        {
+            board[car[v].x  + i + (car[v].length -1)][car[v].y] = 1;
+            board[car[v].x + (i - 1)][car[v].y] = 0;
+        }
+    }
+    if (dir == 0)
+        car[v].y = car[v].y - step;
+    if (dir == 2)
+        car[v].y = car[v].y + step;
+    if (dir == 1)
+        car[v].x = car[v].x - step;
+    if (dir == 3)
+        car[v].x = car[v].x + step;
+}
+
+
+
+void init_board()
+{
+    int i,j;
+    for(i = 0; i &lt; 6; i++)
+    {
+        for(j = 0; j &lt; 6; j++)
+        {
+            board[i][j] = 0;
+        }
+    }
+
+    for (i = 0; i &lt; nbV; i++)
+    {
+        for (j = 0; j &lt; car[i].length; j++)
+        {
+            if (car[i].direction == 0)
+                board[car[i].x][car[i].y + j] = 1;
+            else
+                board[car[i].x + j][car[i].y ] = 1;
+        }
+    }
+}
+</declaration>
+	<template>
+		<name x="5" y="5">RushHour</name>
+		<declaration>// Place local declarations here.
+clock x;
+clock y;
+</declaration>
+		<location id="id0" x="-705" y="-110">
+		</location>
+		<location id="id1" x="-459" y="-110">
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="select" x="-272" y="-119">v:int[0,12],
+d:int[0,3],
+n:int[1,4]</label>
+			<label kind="guard" x="-306" y="25">is_move_autorized(v,d,n) &amp;&amp;
+car[v].length == 3 &amp;&amp;
+x &gt;= n * 2</label>
+			<label kind="assignment" x="-535" y="0">move(v,d,n),
+x:=0</label>
+			<nail x="-246" y="-51"/>
+			<nail x="-374" y="102"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="select" x="-501" y="-280">v:int[0,12],
+d:int[0,3],
+n:int[1,4]</label>
+			<label kind="guard" x="-272" y="-272">is_move_autorized(v,d,n) &amp;&amp;
+car[3].length == 2 &amp;&amp;
+x &gt;= n</label>
+			<label kind="assignment" x="-399" y="-195">move(v,d,n),
+x:=0</label>
+			<nail x="-391" y="-331"/>
+			<nail x="-229" y="-187"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="assignment" x="-646" y="-102">init_board(),
+x:=0,
+y:=0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+RH = RushHour();
+// List one or more processes to be composed into a system.
+system RH;
+    </system>
+	<queries>
+	</queries>
+</nta>

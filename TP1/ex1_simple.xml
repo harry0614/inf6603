@@ -12,152 +12,96 @@ int volTrans;</declaration>
 		<declaration>// Place local declarations here.
 
 int vol = 0;</declaration>
-		<location id="id0" x="-110" y="-204">
-			<name x="-120" y="-238">transIn</name>
+		<location id="id0" x="-187" y="-246">
+			<name x="-197" y="-280">transIn</name>
 		</location>
-		<location id="id1" x="-110" y="25">
-			<name x="-135" y="42">transOut</name>
+		<location id="id1" x="-195" y="85">
+			<name x="-220" y="102">transOut</name>
 		</location>
-		<location id="id2" x="93" y="-85">
-			<name x="119" y="-94">intern</name>
+		<location id="id2" x="-603" y="-76">
+			<name x="-646" y="-59">robinet</name>
 		</location>
-		<location id="id3" x="-144" y="204">
-			<name x="-152" y="238">out</name>
+		<location id="id3" x="-391" y="-76">
+			<name x="-408" y="-51">ide</name>
 		</location>
-		<location id="id4" x="-144" y="-306">
-			<name x="-153" y="-340">in</name>
-		</location>
-		<location id="id5" x="-391" y="-76">
-			<name x="-459" y="-84">ide</name>
-		</location>
-		<init ref="id5"/>
-		<transition>
-			<source ref="id0"/>
-			<target ref="id5"/>
-			<label kind="guard" x="-306" y="-263">volMax == vol + volTrans</label>
-			<label kind="synchronisation" x="-306" y="-246">c3?</label>
-			<label kind="assignment" x="-306" y="-229">vol := volMax</label>
-			<nail x="-263" y="-246"/>
-		</transition>
-		<transition>
-			<source ref="id1"/>
-			<target ref="id5"/>
-			<label kind="guard" x="-331" y="51">vol - volTrans &lt;= 0</label>
-			<label kind="synchronisation" x="-331" y="68">c3!</label>
-			<label kind="assignment" x="-331" y="85">volTrans := vol,
-vol := 0</label>
-			<nail x="-263" y="110"/>
-		</transition>
-		<transition>
-			<source ref="id5"/>
-			<target ref="id1"/>
-			<label kind="guard" x="-230" y="-85">vol == volMax</label>
-			<label kind="synchronisation" x="-229" y="-68">c1!</label>
-			<label kind="assignment" x="-229" y="-51">volTrans = vol</label>
-			<nail x="-153" y="-68"/>
-		</transition>
-		<transition>
-			<source ref="id0"/>
-			<target ref="id5"/>
-			<label kind="guard" x="-306" y="-153">volMax &lt; (vol + volTrans)</label>
-			<label kind="synchronisation" x="-306" y="-136">c2!</label>
-			<label kind="assignment" x="-306" y="-119">volTrans := (volMax - vol),
-vol := volMax</label>
-			<nail x="-161" y="-127"/>
-		</transition>
-		<transition>
-			<source ref="id5"/>
-			<target ref="id3"/>
-			<label kind="guard" x="-323" y="153">vol != 0</label>
-			<nail x="-340" y="170"/>
-		</transition>
-		<transition>
-			<source ref="id4"/>
-			<target ref="id5"/>
-			<label kind="assignment" x="-365" y="-289">vol := volMax</label>
-			<nail x="-348" y="-272"/>
-			<nail x="-348" y="-272"/>
-			<nail x="-348" y="-272"/>
-		</transition>
+		<init ref="id3"/>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id3"/>
-			<label kind="guard" x="0" y="178">vol != 0</label>
-			<nail x="93" y="204"/>
-		</transition>
-		<transition>
-			<source ref="id2"/>
-			<target ref="id4"/>
-			<label kind="guard" x="8" y="-331">vol != volMax</label>
-			<nail x="93" y="-306"/>
-		</transition>
-		<transition>
-			<source ref="id2"/>
-			<target ref="id0"/>
-			<label kind="synchronisation" x="-51" y="-144">c1?</label>
-			<nail x="-43" y="-119"/>
-		</transition>
-		<transition>
-			<source ref="id0"/>
-			<target ref="id2"/>
-			<label kind="guard" x="-68" y="-221">volMax &gt; vol + volTrans</label>
-			<label kind="synchronisation" x="-68" y="-204">c3?</label>
-			<label kind="assignment" x="-68" y="-187">vol = vol + volTrans</label>
-			<nail x="-8" y="-187"/>
-		</transition>
-		<transition>
-			<source ref="id5"/>
-			<target ref="id0"/>
-			<label kind="guard" x="-289" y="-212">vol == 0</label>
-			<label kind="synchronisation" x="-289" y="-195">c1?</label>
-			<nail x="-280" y="-187"/>
-		</transition>
-		<transition>
-			<source ref="id2"/>
-			<target ref="id1"/>
-			<label kind="synchronisation" x="-34" y="0">c1!</label>
-			<label kind="assignment" x="-34" y="25">volTrans = vol</label>
-			<nail x="0" y="17"/>
-		</transition>
-		<transition>
-			<source ref="id1"/>
-			<target ref="id2"/>
-			<label kind="guard" x="-93" y="-93">vol - volTrans &gt; 0</label>
-			<label kind="synchronisation" x="-93" y="-76">c2?</label>
-			<label kind="assignment" x="-93" y="-59">vol = vol - volTrans</label>
-			<nail x="-42" y="-68"/>
-		</transition>
-		<transition>
-			<source ref="id1"/>
-			<target ref="id5"/>
-			<label kind="guard" x="-306" y="-25">vol - volTrans == 0</label>
-			<label kind="synchronisation" x="-306" y="-8">c2?</label>
-			<label kind="assignment" x="-306" y="8">vol := 0</label>
-			<nail x="-255" y="0"/>
+			<label kind="guard" x="-544" y="-187">vol != 0</label>
+			<label kind="assignment" x="-544" y="-170">vol := 0</label>
+			<nail x="-484" y="-153"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
-			<target ref="id5"/>
-			<label kind="assignment" x="-399" y="212">vol := 0</label>
-			<nail x="-382" y="204"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-323" y="-8">c1!</label>
+			<label kind="assignment" x="-323" y="8">volTrans = vol</label>
 		</transition>
 		<transition>
-			<source ref="id5"/>
-			<target ref="id4"/>
-			<label kind="guard" x="-348" y="-323">vol != volMax</label>
-			<nail x="-391" y="-306"/>
+			<source ref="id3"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-289" y="-195">c1?</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-535" y="0">vol != volMax</label>
+			<label kind="assignment" x="-535" y="17">vol := volMax</label>
+			<nail x="-484" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-382" y="-297">volMax &gt;= vol + volTrans</label>
+			<label kind="synchronisation" x="-382" y="-280">c3?</label>
+			<label kind="assignment" x="-382" y="-263">vol := vol + volTrans</label>
+			<nail x="-357" y="-221"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-382" y="85">vol - volTrans &lt;= 0</label>
+			<label kind="synchronisation" x="-382" y="102">c3!</label>
+			<label kind="assignment" x="-382" y="119">volTrans := vol,
+vol := 0</label>
+			<nail x="-340" y="59"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-187" y="-178">volMax &lt; (vol + volTrans)</label>
+			<label kind="synchronisation" x="-187" y="-161">c2!</label>
+			<label kind="assignment" x="-187" y="-144">volTrans := (volMax - vol),
+vol := volMax</label>
+			<nail x="-238" y="-102"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-187" y="-51">vol - volTrans &gt;= 0</label>
+			<label kind="synchronisation" x="-187" y="-34">c2?</label>
+			<label kind="assignment" x="-187" y="-17">vol := vol - volTrans</label>
+			<nail x="-229" y="-51"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-569" y="-93">vol != volMax || vol != 0</label>
+			<nail x="-484" y="-76"/>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-S1 = Seau(5);
-S2 = Seau(3);
+S1 = Seau(17);
+S2 = Seau(12);
+S3 = Seau(5);
 
 // List one or more processes to be composed into a system.
-system S1, S2;
+system S1, S2, S3;
     </system>
 	<queries>
 		<query>
-			<formula>E&lt;&gt; not (S1.vol == 1 &amp;&amp; S2.vol == 1)
+			<formula>A[] not (S1.vol == 8 &amp;&amp; S2.vol == 2 &amp;&amp; S3.vol == 0)
 			</formula>
 			<comment>
 			</comment>
